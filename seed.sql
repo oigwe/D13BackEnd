@@ -22,7 +22,7 @@ CREATE TABLE endorsements (
 
 CREATE TABLE posts (
     id SERIAL PRIMARY KEY UNIQUE,
-    user_id VARCHAR REFERENCES users(id) NOT NULL, 
+    userid VARCHAR REFERENCES users(id) NOT NULL, 
     image_url VARCHAR NULL,
     caption VARCHAR NOT NULL,
     numberOfComments INT NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE posts (
 CREATE TABLE comments (
     id SERIAL PRIMARY KEY UNIQUE, 
     post_id INT REFERENCES posts(id) NOT NULL,
-    user_id VARCHAR REFERENCES users(id) NOT NULL,
+    userid VARCHAR REFERENCES users(id) NOT NULL,
     commentText TEXT NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT NOW()
 )
@@ -58,7 +58,7 @@ CREATE TABLE  shows (
 
 CREATE TABLE userPreference (
     id SERIAL PRIMARY KEY UNIQUE, 
-    user_id  VARCHAR REFERENCES users(id),
+    userid  VARCHAR REFERENCES users(id),
     newstype_1 INT REFERENCES newspapers(id) NULL,
     newstype_2 INT REFERENCES newspapers(id) NULL,
     newstype_2 INT REFERENCES newspapers(id) NULL,
