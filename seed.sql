@@ -67,4 +67,5 @@ CREATE TABLE userPreference (
     tvtype_3 INT REFERENCES tv(id) NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT NOW()
 )
-  
+
+
