@@ -1,6 +1,8 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
+const admin = require('./firebase')
+
 
 const commentsRouter = require('./routes/comments');
 const endorsementsRouter = require('./routes/endorsements');
@@ -11,12 +13,29 @@ const tvShowsRouter = require('./routes/tvshows');
 const userPreferenceRouter = require('./routes/userPreference');
 const usersRouter = require('./routes/users');
 
+app.use(cors());
+
 
 // MIDDLEWARE NEEDED
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
+
+
+//WHAT DO I DO WITH THIS
+const checkFirebaseToken = (req, res, next) => {
+  const {token} = req.body
+  admin.auth().verifyIdToken(token)
+.then(function(decodedToken) {
+  var uid = decodedToken.uid;
+  next();
+  // ...
+}).catch(function(error) {
+  // Handle error
+  res.json('ERROR')
+});
+}
 
 // routes
 app.use('/comments', commentsRouter);
