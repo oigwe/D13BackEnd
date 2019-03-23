@@ -6,18 +6,19 @@ CREATE DATABASE d13backend;
 CREATE TABLE users (
     id SERIAL PRIMARY KEY NOT NULL,
     email VARCHAR UNIQUE NOT NULL,
-    nameOfUser VARCHAR NULL,
-    username VARCHAR UNIQUE NULL,
+    nameofuser VARCHAR NULL,
+    username VARCHAR UNIQUE NOT NULL,
     title VARCHAR NULL,
-    profileUrl VARCHAR NULL,
+    profileurl VARCHAR NULL,
+    borough VARCHAR NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 
 CREATE TABLE endorsements (
     id SERIAL PRIMARY KEY NOT NULL, 
-    personEndorsingId INT REFERENCES users(id) NOT NULL,
-    personBeingEndorsedId INT REFERENCES users(id) NOT NULL,
+    endorsing INT REFERENCES users(id) NOT NULL,
+    endorsed INT REFERENCES users(id) NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
@@ -26,22 +27,22 @@ CREATE TABLE posts (
     userId INT REFERENCES users(id) NOT NULL, 
     imageUrl VARCHAR NULL,
     caption VARCHAR NOT NULL,
-    numberOfComments INT NOT NULL,
+    numberofcomments INT NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE comments (
     id SERIAL PRIMARY KEY NOT NULL, 
-    postId INT REFERENCES posts(id) NOT NULL,
-    userId INT REFERENCES users(id) NOT NULL,
-    commentText TEXT NOT NULL,
+    postid INT REFERENCES posts(id) NOT NULL,
+    userid INT REFERENCES users(id) NOT NULL,
+    commenttext TEXT NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE followers (
     id SERIAL PRIMARY KEY NOT NULL,
-    personFollowingId INT REFERENCES users(id) NOT NULL, 
-    personBeingFollowed INT REFERENCES users(id) NOT NULL,
+    follower INT REFERENCES users(id) NOT NULL, 
+    followed INT REFERENCES users(id) NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT NOW()
 ); 
 
@@ -60,15 +61,41 @@ CREATE TABLE  tvShows (
 
 CREATE TABLE userpreference (
     id SERIAL PRIMARY KEY NOT NULL, 
-    userId INT REFERENCES users(id) NOT NULL,
-    newstype_1 INT REFERENCES newspapers(id) NULL,
-    newstype_2 INT REFERENCES newspapers(id) NULL,
-    newstype_3 INT REFERENCES newspapers(id) NULL,
+    userid INT REFERENCES users(id) NOT NULL,
+    topic_1 INT REFERENCES newspapers(id) NULL,
+    topic_2 INT REFERENCES newspapers(id) NULL,
+    topic_3 INT REFERENCES newspapers(id) NULL,
     tvtype_1 INT REFERENCES tvShows(id) NULL,
     tvtype_2 INT REFERENCES tvShows(id) NULL,
     tvtype_3 INT REFERENCES tvShows(id) NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
+INSERT INTO users (email, nameofuser, username, title, profileurl, borough) VALUES
+('mo@pursuit.com', 'Mo', 'MoMoney', 'Citizen', 'mo.png', 'manhattan'),
+('mo1@pursuit.com', 'Mo1', 'MoMoney1', 'Politican', 'mo1.png', 'queens');
+
+
+INSERT INTO endorsements (endorsing, endorsed) VALUES
+(1,2);
+
+INSERT INTO posts (userid, imageurl, caption, numberofcomments) VALUES
+(1,'beach.png', 'i want to be here', 3);
+
+INSERT INTO comments (postid, userid, commenttext) VALUES
+(1, 1, 'i hate it here'),
+(1, 2, 'i love it here');
+
+INSERT INTO followers (follower, followed) VALUES
+(1,2);
+
+INSERT INTO newspapers (title) VALUES
+('New York Times');
+
+INSERT INTO tvShows (title) VALUES
+('Morning Joe');
+
+INSERT INTO userpreference (userid, topic_1, tvtype_1) VALUES
+(1,1,1);
 
 
