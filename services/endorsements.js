@@ -9,7 +9,7 @@ Endorsements.create = (endorsing, endorsed) => {
 }
 
 Endorsements.read = (endorsing) => {
-  const sql = `SELECT * FROM endorsements WHERE endorsing=${endorsing}`;
+  const sql = `SELECT * FROM endorsements WHERE endorsing=$[endorsing]`;
   return db.any(sql, {endorsing});
 }
 

@@ -1,7 +1,6 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 9000;
 
 const commentsRouter = require('./routes/comments');
 const endorsementsRouter = require('./routes/endorsements');
@@ -35,9 +34,9 @@ app.use((err, req, res, next) => {
   res.status(400).json({error: err.toString()});
 });
 
-app.listen(port, () => {
+/*app.listen(port, () => {
   console.log('D13 API is running on Port: '+port);
-});
+});*/
 
 
 module.exports = {app,}
