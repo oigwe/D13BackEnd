@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "$(npm bin)/jest --coverage",
+    "test": "$(npm bin)/jest --coverage && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "seed:local": "cat seed.sql | psql",
+    "seed": "cat seed.sql | heroku pg:psql",
+    "write-coveralls": "rm -rf .coveralls.yml && echo \"repo_token:$COVERAGE_TOKEN\" >> .coveralls.yml",
     "start": "node index.js"
   },
   "repository": {
@@ -25,6 +28,26 @@
     "pg-promise": "^8.6.4"
   },
   "devDependencies": {
-    "jest": "^24.5.0"
+    "coveralls": "^3.0.3",
+    "jest": "^24.5.0",
+    "supertest": "^4.0.2"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "clover",
+      "html"
+    ],
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/vendor/**",
+      "!**/__fixtures__/**",
+      "!**/coverage/**",
+      "!index.js"
+    ]
   }
 }
