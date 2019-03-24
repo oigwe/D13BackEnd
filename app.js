@@ -13,7 +13,7 @@ const tvShowsRouter = require('./routes/tvshows');
 const userPreferenceRouter = require('./routes/userPreference');
 const usersRouter = require('./routes/users');
 
-app.use(cors());
+/*app.use(cors());*/
 
 
 // MIDDLEWARE NEEDED
