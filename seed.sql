@@ -71,6 +71,14 @@ CREATE TABLE userpreference (
     createdAt TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
+CREATE TABLE notifications (
+    id SERIAL PRIMARY KEY NOT NULL, 
+    sender INT REFERENCES users(id) NOT NULL,
+    receiver VARCHAR NOT NULL,
+    what VARCHAR NULL,
+    createdAt TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
 /*INSERT INTO users (email, nameofuser, username, title, profileurl, borough) VALUES
 ('mo@pursuit.com', 'Mo', 'MoMoney', 'Citizen', 'mo.png', 'manhattan'),
 ('mo1@pursuit.com', 'Mo1', 'MoMoney1', 'Politican', 'mo1.png', 'queens');
