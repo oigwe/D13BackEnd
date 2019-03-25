@@ -8,7 +8,7 @@
     "seed": "cat seed.sql | heroku pg:psql",
     "write-coveralls": "rm -rf .coveralls.yml && echo \"repo_token:$COVERAGE_TOKEN\" >> .coveralls.yml",
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "$(npm bin)/jest --coverage && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "repository": {
     "type": "git",

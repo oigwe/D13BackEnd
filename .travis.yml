@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - "11.10.1"
+before_script: 
+  - export COVERAGE_TOKEN = $COVERAGE_TOKEN
 deploy:
   provider: heroku
   api_key: $HEROKU_KEY
