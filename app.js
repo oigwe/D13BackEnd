@@ -2,6 +2,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const admin = require('./firebase')
+const cors = require('cors')
 
 
 const commentsRouter = require('./routes/comments');
@@ -10,10 +11,11 @@ const followersRouter = require('./routes/followers');
 const newspapersRouter = require('./routes/newspapers');
 const postsRouter = require('./routes/posts');
 const tvShowsRouter = require('./routes/tvshows');
-const userPreferenceRouter = require('./routes/userPreference');
+const userPreferenceTopicsRouter = require('./routes/userPreferenceTopics');
+const userPreferenceTVRouter = require('./routes/userPreferenceTV');
 const usersRouter = require('./routes/users');
 
-/*app.use(cors());*/
+app.use(cors());
 
 
 // MIDDLEWARE NEEDED
@@ -29,6 +31,7 @@ const checkFirebaseToken = (req, res, next) => {
   admin.auth().verifyIdToken(token)
 .then(function(decodedToken) {
   var uid = decodedToken.uid;
+  //req.uid = decodedToken.uid
   next();
   // ...
 }).catch(function(error) {
@@ -44,7 +47,8 @@ app.use('/followers', followersRouter);
 app.use('/newspapers', newspapersRouter);
 app.use('/posts', postsRouter);
 app.use('/tvshows', tvShowsRouter);
-app.use('/userPreference', userPreferenceRouter);
+app.use('/tv', userPreferenceTVRouter);
+app.use('/topics', userPreferenceTopicsRouter);
 app.use('/users', usersRouter);
 
 

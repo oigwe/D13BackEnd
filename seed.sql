@@ -59,15 +59,25 @@ CREATE TABLE  tvShows (
     createdAt TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE userpreference (
+CREATE TABLE userpreferenceTopics (
     id SERIAL PRIMARY KEY NOT NULL, 
     userid INT REFERENCES users(id) NOT NULL,
-    topic_1 VARCHAR NOT NULL,
+    topic_1 VARCHAR NULL,
     topic_2 VARCHAR NULL,
     topic_3 VARCHAR NULL,
-    tvtype_1 VARCHAR NOT NULL,
+    topic_4 VARCHAR NULL,
+    topic_5 VARCHAR NULL,
+    createdAt TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE userpreferenceTV (
+    id SERIAL PRIMARY KEY NOT NULL, 
+    userid INT REFERENCES users(id) NOT NULL,
+    tvtype_1 VARCHAR NULL,
     tvtype_2 VARCHAR NULL,
     tvtype_3 VARCHAR NULL,
+    tvtype_4 VARCHAR NULL,
+    tvtype_5 VARCHAR NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT NOW()
 );
 

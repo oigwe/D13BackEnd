@@ -4,11 +4,15 @@ const UpService = require('../services/newspapers');
 
 // POST - CREATE 
 d13Router.post('/', (req, res, next) => {
-  const {email, nameofuser, username, title, profileurl} = req.body;
+  const {email, nameofuser, username, title, borough, profileurl} = req.body;
 
-  UpService.create(email, nameofuser, username, title, profileurl)
+  UpService.create(email, nameofuser, username, title, borough, profileurl)
     .then(data => {
-      res.json({success: `A profile for ${nameofuser} have been created`});
+      console.log("Data",data.id)
+      res.json({
+        message:  `A profile for ${username} have been created`, 
+        id: data.id
+      });
     })
     .catch(err => {
       next(err);
@@ -16,10 +20,10 @@ d13Router.post('/', (req, res, next) => {
 });
 
 // GET - READ 
-d13Router.get('/:nameofuser/', (req, res, next) => {
-  const {nameofuser} = req.params;
+d13Router.get('/:username/', (req, res, next) => {
+  const {username} = req.params;
 
-  UpService.read(nameofuser)
+  UpService.read(username)
     .then(data => {
       res.json({
         'data': data
@@ -46,8 +50,8 @@ d13Router.put('/:id', (req, res, next) => {
 });
 
 // DELETE - DELETE
-d13Router.delete('/:nameofuser/', (req, res, next) => {
-  const {userid} = req.params;
+d13Router.delete('/:username/', (req, res, next) => {
+  const {username} = req.params;
 
   UpService.delete(id)
     .then(data => {

@@ -1,35 +1,39 @@
 const {db} = require('./dbConnect');
-const TV = {};
+const tv = {};
 
-TV.create = (title) => {
+tv.create = (userid, tvtype_1, tvtype_2, tvtype_3, tvtype_4, tvtype_5) => {
   const sql = `
-  INSERT INTO tvShows (title)) VALUES 
-  ($[title]) RETURNING id`;
-  return db.one(sql, {title});
+  INSERT INTO userpreferenceTV (userid, tvtype_1, tvtype_2, tvtype_3, tvtype_4, tvtype_5) VALUES 
+  ($[userId], $[tvtype_1], $[tvtype_2], $[tvtype_3], $[tvtype_4], $[tvtype_5]) RETURNING id;`;
+  return db.one(sql, {userid, tvtype_1, tvtype_2, tvtype_3, tvtype_4, tvtype_5});
 }
 
-TV.read = (id) => {
-  const sql = `SELECT * FROM tvShows WHERE title=$[title]`;
-  return db.one(sql, {id});
+tv.read = (userid) => {
+  const sql = `SELECT * FROM userpreferenceTV WHERE userid=${userid}`;
+  return db.one(sql, {userid});
 }
 
-/*TV.update = (title) => {
+tv.update = (userid, tvtype_1, tvtype_2, tvtype_3, tvtype_4, tvtype_5) => {
   const sql = `
-  UPDATE tvShows
+  UPDATE userpreferenceTV
   SET
-  title=$[title]
+    tvtype_1, = $[tvtype_1],
+    tvtype_2 = $[tvtype_2], 
+    tvtype_3 = $[tvtype_3], 
+    tvtype_4 = $[tvtype_4], 
+    tvtype_5 = $[tvtype_5]
   WHERE
-    id=$[id]
+    userid=$[userid]
   `;
-  return db.none(sql, {title});
-}*/
+  return db.none(sql, {userid, tvtype_1, tvtype_2, tvtype_3, tvtype_4, tvtype_5});
+}
 
-TV.delete = (id) => {
+tv.delete = (userid) => {
   const sql = `
-  DELETE FROM tvShows WHERE id=$[id]
+  DELETE FROM userpreferenceTV WHERE userid=$[userid]
   `;
-  return db.none(sql, {id});
+  return db.none(sql, {userid});
 }
 
 
-module.exports = TV;
+module.exports = tv;

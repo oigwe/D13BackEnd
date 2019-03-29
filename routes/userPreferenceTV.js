@@ -1,14 +1,14 @@
 const express = require('express');
 const d13Router = express.Router();
-const UpService = require('../services/newspapers');
+const UpServiceTV = require('../services/tvshows');
 
 // POST - CREATE 
 d13Router.post('/', (req, res, next) => {
-  const {userid, topic_1, topic_2, topic_3, tvtype_1, tvtype_2, tvtype_3} = req.body;
+  const {userid, tvtype_1, tvtype_2, tvtype_3, tvtype_4, tvtype_5} = req.body;
 
-  UpService.create(userid, topic_1, topic_2, topic_3, tvtype_1, tvtype_2, tvtype_3)
+  UpServiceTV.create(userid, tvtype_1, tvtype_2, tvtype_3, tvtype_4, tvtype_5)
     .then(data => {
-      res.json({success: `Preferences for user ${userid} have been created`});
+      res.json({success: `TV Preferences for user ${userid} have been created`});
     })
     .catch(err => {
       next(err);
@@ -19,7 +19,7 @@ d13Router.post('/', (req, res, next) => {
 d13Router.get('/:userid/', (req, res, next) => {
   const {id} = req.params;
 
-  UpService.read(id)
+  UpServiceTV.read(id)
     .then(data => {
       res.json({
         'data': data
@@ -33,10 +33,10 @@ d13Router.get('/:userid/', (req, res, next) => {
 
 // PUT - UPDATE
 d13Router.put('/:userid', (req, res, next) => {
-  const {topic_1, topic_2, topic_3, tvtype_1, tvtype_2, tvtype_3} = req.body;
+  const {tvtype_1, tvtype_2, tvtype_3, tvtype_4, tvtype_5} = req.body;
   const {userid} = req.params;
 
-  UpService.update(topic_1, topic_2, topic_3, tvtype_1, tvtype_2, tvtype_3)
+  UpServiceTV.update(tvtype_1, tvtype_2, tvtype_3, tvtype_4, tvtype_5)
     .then(data => {
       res.json({success: `Updated preferences for user with ID ${id}`});
     })
@@ -49,9 +49,9 @@ d13Router.put('/:userid', (req, res, next) => {
 d13Router.delete('/:userid/', (req, res, next) => {
   const {userid} = req.params;
 
-  UpService.delete(id)
+  UpServiceTV.delete(id)
     .then(data => {
-      res.json({success: `Preferences for ${userid} have been removed from the database`});
+      res.json({success: `TV Preferences for ${userid} have been removed from the database`});
     })
     .catch(err => {
       next(err);

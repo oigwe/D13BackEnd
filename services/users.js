@@ -1,11 +1,11 @@
 const {db} = require('./dbConnect');
 const Users = {};
 
-Users.create = (email, nameofuser, username, title, profileurl) => {
+Users.create = (email, nameofuser, username, title, borough, profileurl) => {
   const sql = `
-  INSERT INTO users (email, nameOfUser, username, title, profileUrl, borough) VALUES 
-  ($[email], $[nameOfUser], $[username], $[title], $[profileUrl], $[borough]) RETURNING id;`;
-  return db.one(sql, {email, nameofuser, username, title, profileurl});
+  INSERT INTO users (email, nameofuser, username, title, profileurl, borough) VALUES 
+  ($[email], $[nameofuser], $[username], $[title], $[borough], $[profileurl]) RETURNING id;`;
+  return db.one(sql, {email, nameofuser, username, title, borough, profileurl});
 }
 
 Users.read = (nameofuser) => {
@@ -13,7 +13,7 @@ Users.read = (nameofuser) => {
   return db.one(sql, {nameofuser});
 }
 
-Users.update = (id, email, nameofuser, username, title, profileurl) => {
+Users.update = (id, email, nameofuser, username, title, borough, profileurl) => {
   const sql = `
   UPDATE users
   SET
@@ -21,12 +21,12 @@ Users.update = (id, email, nameofuser, username, title, profileurl) => {
     nameOfUser=$[nameOfUser],
     username=$[username],
     title=$[title],
-    profileUrl=$[profileUrl],
     borough=$[borough]
+    profileUrl=$[profileUrl],
   WHERE
     id=$[id]
   `;
-  return db.none(sql, {id, email, nameofuser, username, title, profileurl});
+  return db.none(sql, {id, email, nameofuser, username, title, borough, profileurl});
 }
 
 Users.delete = (id) => {
