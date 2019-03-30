@@ -40,6 +40,19 @@ const checkFirebaseToken = (req, res, next) => {
 });
 }
 
+const validUser = (req, res, next) => {
+  //GET THE USER'S USID
+  const uidPostgress = '' //READ REQUEST FOR DATABASE IN POSTGRESS (TABLE)
+  const uidDecodedToken = req.decodedToken.uid;
+  if(uidPostgress === uidDecodedToken){
+    next()
+  }
+  else{
+    res.json({error: 'You are not the valid user'})
+  }
+}
+
+
 // routes
 app.use('/comments', commentsRouter);
 app.use('/endorsements', endorsementsRouter);

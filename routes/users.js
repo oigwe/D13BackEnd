@@ -1,6 +1,6 @@
 const express = require('express');
 const d13Router = express.Router();
-const UpService = require('../services/newspapers');
+const UpService = require('../services/users');
 
 // POST - CREATE 
 d13Router.post('/', (req, res, next) => {
@@ -8,7 +8,6 @@ d13Router.post('/', (req, res, next) => {
 
   UpService.create(email, nameofuser, username, title, borough, profileurl)
     .then(data => {
-      console.log("Data",data.id)
       res.json({
         message:  `A profile for ${username} have been created`, 
         id: data.id

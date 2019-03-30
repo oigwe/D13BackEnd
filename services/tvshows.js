@@ -4,7 +4,7 @@ const tv = {};
 tv.create = (userid, tvtype_1, tvtype_2, tvtype_3, tvtype_4, tvtype_5) => {
   const sql = `
   INSERT INTO userpreferenceTV (userid, tvtype_1, tvtype_2, tvtype_3, tvtype_4, tvtype_5) VALUES 
-  ($[userId], $[tvtype_1], $[tvtype_2], $[tvtype_3], $[tvtype_4], $[tvtype_5]) RETURNING id;`;
+  ($[userid], $[tvtype_1], $[tvtype_2], $[tvtype_3], $[tvtype_4], $[tvtype_5]) RETURNING id;`;
   return db.one(sql, {userid, tvtype_1, tvtype_2, tvtype_3, tvtype_4, tvtype_5});
 }
 
