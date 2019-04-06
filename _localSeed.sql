@@ -11,11 +11,29 @@ CREATE TABLE users (
     username VARCHAR UNIQUE NOT NULL,
     title VARCHAR NULL,
     profileurl VARCHAR NULL,
-    borough VARCHAR NOT NULL,
+    zipcode VARCHAR NOT NULL,
     firebaseUID VARCHAR NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
+/*CREATE TABLE politicians (
+    id SERIAL PRIMARY KEY NOT NULL,
+    campemail VARCHAR UNIQUE NOT NULL,
+    nameofuser VARCHAR NOT NULL,
+    username VARCHAR UNIQUE NOT NULL,
+    title VARCHAR NULL,
+    profileurl VARCHAR NULL,
+    representing VARCHAR NOT NULL,
+    firebaseUID VARCHAR NOT NULL,
+    createdAt TIMESTAMP NOT NULL DEFAULT NOW()
+);*/
+
+CREATE TABLE statusUpdates (
+    id SERIAL PRIMARY KEY NOT NULL,
+    poster INT REFERENCES users(id) NOT NULL, 
+    post VARCHAR NULL, 
+    createdAt TIMESTAMP NOT NULL DEFAULT NOW()
+)
 
 CREATE TABLE endorsements (
     id SERIAL PRIMARY KEY NOT NULL, 

@@ -16,8 +16,8 @@ d13Router.post('/', (req, res, next) => {
 });
 
 // GET - READ 
-d13Router.get('/:userid/', (req, res, next) => {
-  const {id} = req.params;
+d13Router.get('/', (req, res, next) => {
+  const {id} = req.query;
 
   UpServiceTV.read(id)
     .then(data => {

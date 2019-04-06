@@ -1,32 +1,31 @@
 const {db} = require('./dbConnect');
 const Users = {};
 
-Users.create = (email, nameofuser, username, title, borough, profileurl) => {
+Users.create = (email, nameofuser, username, title, profileurl, zipcode, firebaseUID) => {
   const sql = `
-  INSERT INTO users (email, nameofuser, username, title, profileurl, borough) VALUES 
-  ($[email], $[nameofuser], $[username], $[title], $[borough], $[profileurl]) RETURNING id;`;
-  return db.one(sql, {email, nameofuser, username, title, borough, profileurl});
+  INSERT INTO users (email, nameofuser, username, title, profileurl, zipcode, firebaseUID) VALUES 
+  ($[email], $[nameofuser], $[username], $[title], $[profileurl], $[zipcode], $[firebaseUID]) RETURNING id;`;
+  return db.one(sql, {email, nameofuser, username, title, profileurl, zipcode, firebaseUID});
 }
 
-Users.read = (nameofuser) => {
-  const sql = `SELECT * FROM users WHERE nameofuser=$[nameofuser]`;
-  return db.one(sql, {nameofuser});
+Users.read = (email) => {
+  const sql = `SELECT * FROM users WHERE email=$[email]`;
+  return db.one(sql, {email});
 }
 
-Users.update = (id, email, nameofuser, username, title, borough, profileurl) => {
+Users.update = (id, email, nameofuser, username, title, zipcode, profileurl) => {
   const sql = `
   UPDATE users
-  SET
-    email=$[email],
-    nameOfUser=$[nameOfUser],
+    SET email=$[email],
+    nameofuser = $[nameofuser],
     username=$[username],
     title=$[title],
-    borough=$[borough]
+    zipcode=$[zipcode]
     profileUrl=$[profileUrl],
   WHERE
     id=$[id]
   `;
-  return db.none(sql, {id, email, nameofuser, username, title, borough, profileurl});
+  return db.none(sql, {id, email, nameofuser, username, title, zipcode, profileurl});
 }
 
 Users.delete = (id) => {

@@ -16,13 +16,13 @@ d13Router.post('/', (req, res, next) => {
 });
 
 // GET - READ 
-d13Router.get('/:userid/', (req, res, next) => {
-  const {userid} = req.params;
+d13Router.get('/', (req, res, next) => {
+  const {userid} = req.query;
 
   UpServiceTopics.read(userid)
     .then(data => {
       res.json({
-        'data': data
+        'data': [data.topic_1, data.topic_2, data.topic_3, data.topic_4, data.topic_5]
       });
     })
     .catch(err => {

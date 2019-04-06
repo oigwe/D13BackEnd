@@ -4,9 +4,9 @@ const UpService = require('../services/users');
 
 // POST - CREATE 
 d13Router.post('/', (req, res, next) => {
-  const {email, nameofuser, username, title, borough, profileurl} = req.body;
+  const {email, nameofuser, username, title, profileurl, zipcode, firebaseUID} = req.body;
 
-  UpService.create(email, nameofuser, username, title, borough, profileurl)
+  UpService.create(email, nameofuser, username, title, profileurl, zipcode, firebaseUID)
     .then(data => {
       res.json({
         message:  `A profile for ${username} have been created`, 
@@ -19,10 +19,10 @@ d13Router.post('/', (req, res, next) => {
 });
 
 // GET - READ 
-d13Router.get('/:username/', (req, res, next) => {
-  const {username} = req.params;
+d13Router.get('/', (req, res, next) => {
+  const {email} = req.query;
 
-  UpService.read(username)
+  UpService.read(email)
     .then(data => {
       res.json({
         'data': data
