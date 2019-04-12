@@ -16,7 +16,7 @@ d13Router.post('/', (req, res, next) => {
 });
 
 // GET - READ 
-d13Router.get('/:userid/', (req, res, next) => {
+d13Router.get('/:userid', (req, res, next) => {
   const {userid} = req.params;
 
   FollowersService.read(userid)

@@ -1,26 +1,32 @@
 
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS endorsements;
-DROP TABLE IF EXISTS posts;
-DROP TABLE IF EXISTS comments;
-DROP TABLE IF EXISTS followers;
-DROP TABLE IF EXISTS newspapers;
-DROP TABLE IF EXISTS userpreferenceTopics;
-DROP TABLE IF EXISTS userpreferenceTV;
-DROP TABLE IF EXISTS notifications;
+DROP DATABASE IF EXISTS d13backend;
+CREATE DATABASE d13backend;
 
-
+\c d13backend;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY NOT NULL,
     email VARCHAR UNIQUE NOT NULL,
-    nameofuser VARCHAR NULL,
+    nameofuser VARCHAR NOT NULL,
     username VARCHAR UNIQUE NOT NULL,
     title VARCHAR NULL,
     profileurl VARCHAR NULL,
-    borough VARCHAR NOT NULL,
+    zipcode VARCHAR NOT NULL,
+    firebaseUID VARCHAR NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT NOW()
 );
+
+/*CREATE TABLE politicians (
+    id SERIAL PRIMARY KEY NOT NULL,
+    campemail VARCHAR UNIQUE NOT NULL,
+    nameofuser VARCHAR NOT NULL,
+    username VARCHAR UNIQUE NOT NULL,
+    title VARCHAR NULL,
+    profileurl VARCHAR NULL,
+    representing VARCHAR NOT NULL,
+    firebaseUID VARCHAR NOT NULL,
+    createdAt TIMESTAMP NOT NULL DEFAULT NOW()
+);*/
 
 
 CREATE TABLE endorsements (
@@ -32,10 +38,9 @@ CREATE TABLE endorsements (
 
 CREATE TABLE posts (
     id SERIAL PRIMARY KEY NOT NULL,
-    userId INT REFERENCES users(id) NOT NULL, 
+    userid INT REFERENCES users(id) NOT NULL, 
+    caption VARCHAR NULL,
     imageUrl VARCHAR NULL,
-    caption VARCHAR NOT NULL,
-    numberofcomments INT NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
@@ -55,17 +60,17 @@ CREATE TABLE followers (
 ); 
 
 
-CREATE TABLE newspapers (
+/*CREATE TABLE newspapers (
     id SERIAL PRIMARY KEY NOT NULL,
     title VARCHAR NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT NOW()
-);
+);*/
 
-CREATE TABLE  tvShows (
+/*CREATE TABLE  tvShows (
     id SERIAL PRIMARY KEY NOT NULL,
     title VARCHAR NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT NOW()
-);
+);*/
 
 CREATE TABLE userpreferenceTopics (
     id SERIAL PRIMARY KEY NOT NULL, 

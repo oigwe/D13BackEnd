@@ -1,12 +1,12 @@
 const express = require('express');
 const d13Router = express.Router();
-const PostsService = require('../services/newspapers');
+const PostsService = require('../services/posts');
 
 // POST - CREATE 
 d13Router.post('/', (req, res, next) => {
-  const {userid, imageurl, caption, numberofcomments} = req.body;
+  const {userid, imageurl, caption} = req.body;
 
-  PostsService.create(userid, imageurl, caption, numberofcomments)
+  PostsService.create(userid, imageurl, caption)
     .then(data => {
       res.json({success: `The post ${data.id} has been created`});
     })
@@ -16,8 +16,8 @@ d13Router.post('/', (req, res, next) => {
 });
 
 // GET - READ 
-d13Router.get('/:id/', (req, res, next) => {
-  const {id} = req.params;
+d13Router.get('/', (req, res, next) => {
+  const {id} = req.query;
 
   PostsService.read(id)
     .then(data => {

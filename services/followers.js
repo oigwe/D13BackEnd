@@ -8,9 +8,9 @@ Followers.create = (follower, followed) => {
   return db.one(sql, {follower, followed});
 }
 
-Followers.read = (follower) => {
-  const sql = `SELECT * FROM followers WHERE follower=$[follower]`;
-  return db.any(sql, {follower})
+Followers.read = (userid) => {
+  const sql = `SELECT * FROM followers WHERE follower=$[userid]`;
+  return db.any(sql, {userid})
 }
 
 /*Followers.getFollowing = (follower) => {

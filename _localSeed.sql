@@ -28,12 +28,6 @@ CREATE TABLE users (
     createdAt TIMESTAMP NOT NULL DEFAULT NOW()
 );*/
 
-CREATE TABLE statusUpdates (
-    id SERIAL PRIMARY KEY NOT NULL,
-    poster INT REFERENCES users(id) NOT NULL, 
-    post VARCHAR NULL, 
-    createdAt TIMESTAMP NOT NULL DEFAULT NOW()
-)
 
 CREATE TABLE endorsements (
     id SERIAL PRIMARY KEY NOT NULL, 
@@ -44,10 +38,9 @@ CREATE TABLE endorsements (
 
 CREATE TABLE posts (
     id SERIAL PRIMARY KEY NOT NULL,
-    userId INT REFERENCES users(id) NOT NULL, 
+    userid INT REFERENCES users(id) NOT NULL, 
+    caption VARCHAR NULL,
     imageUrl VARCHAR NULL,
-    caption VARCHAR NOT NULL,
-    numberofcomments INT NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
