@@ -16,8 +16,8 @@ d13Router.post('/', (req, res, next) => {
 });
 
 // GET - READ 
-/*d13Router.get('/', (req, res, next) => {
-  const {id} = req.query;
+d13Router.get('/:id', (req, res, next) => {
+  const {id} = req.params;
 
   PostsService.read(id)
     .then(data => {
@@ -28,7 +28,7 @@ d13Router.post('/', (req, res, next) => {
     .catch(err => {
       next(err);
     })
-});*/
+});
 
 d13Router.get('/:userid/all', (req, res, next) => {
     const {userid} = req.params;

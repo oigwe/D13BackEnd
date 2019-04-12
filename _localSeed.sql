@@ -37,7 +37,7 @@ CREATE TABLE endorsements (
 );
 
 CREATE TABLE posts (
-    id SERIAL PRIMARY KEY NOT NULL,
+    pid SERIAL PRIMARY KEY NOT NULL,
     userid INT REFERENCES users(id) NOT NULL, 
     caption VARCHAR NULL,
     imageUrl VARCHAR NULL,
@@ -45,8 +45,8 @@ CREATE TABLE posts (
 );
 
 CREATE TABLE comments (
-    id SERIAL PRIMARY KEY NOT NULL, 
-    postid INT REFERENCES posts(id) NOT NULL,
+    cid SERIAL PRIMARY KEY NOT NULL, 
+    postid INT REFERENCES posts(pid) NOT NULL,
     userid INT REFERENCES users(id) NOT NULL,
     commenttext TEXT NOT NULL,
     createdAt TIMESTAMP NOT NULL DEFAULT NOW()

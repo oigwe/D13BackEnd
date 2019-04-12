@@ -9,12 +9,12 @@ Posts.create = (userid, imageurl, caption) => {
 }
 
 Posts.read = (id) => {
-    const sql = `SELECT * FROM posts WHERE id=$[id]`;
+    const sql = `SELECT posts.pid, posts.caption, posts.imageurl, users.nameofuser, users.username, users.profileurl, users.id FROM posts JOIN users ON posts.userid = users.id WHERE posts.pid = $[id]`;
     return db.any(sql, {id});
 }
 
 Posts.readAll = (userid) => {
-  const sql = `SELECT posts.id, posts.caption, posts.imageurl, users.nameofuser, users.username FROM posts JOIN users ON posts.userid = users.id WHERE users.id = $[userid]`;
+  const sql = `SELECT posts.pid, posts.caption, posts.imageurl, users.nameofuser, users.username, users.profileurl, users.id FROM posts JOIN users ON posts.userid = users.id WHERE users.id = $[userid]`;
   return db.any(sql, {userid});
 }
 

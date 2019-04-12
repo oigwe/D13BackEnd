@@ -4,7 +4,9 @@ const CommentService = require('../services/comments');
 
 // POST - CREATE 
 d13Router.post('/', (req, res, next) => {
-  const {postid, userid, commenttext} = req.body;
+  const {userid, commenttext} = req.body;
+  const {postid} = req.params;
+
 
   CommentService.create(postid, userid, commenttext)
     .then(data => {
@@ -16,28 +18,13 @@ d13Router.post('/', (req, res, next) => {
 });
 
 // GET - READ 
-d13Router.get('/:id/', (req, res, next) => {
-  const {id} = req.params;
+d13Router.get('/:postid/', (req, res, next) => {
+  const {postid} = req.params;
 
-  CommentService.readUserComments(id)
+  CommentService.readUserComments(postid)
     .then(data => {
       res.json({
         "data": data,
-      /*"items": [
-       {"id": {
-         "comment": data[0].id,
-         "post": data[0].postid
-        },
-        "snippet": {
-         "publishedAt": data[0].createdat,
-         "text": data[0].commenttext,
-         "user": data[0].nameofuser,
-         "thumbnail": {
-           "url": data[0].profileurl
-         }
-        }
-       }
-      ]*/
     });
     })
     .catch(err => {

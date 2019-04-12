@@ -9,7 +9,7 @@ Comments.create = (postid, userid, commenttext) => {
 }
 
 Comments.readUserComments = (postid) => {
-  const sql = `SELECT * FROM comments JOIN users ON comments.userid = users.id WHERE postId=$[postid]`;
+  const sql = `SELECT comments.commenttext, users.nameofuser, users.username, users.profileurl, comments.createdat, users.id FROM comments JOIN users ON comments.userid = users.id WHERE postid = $[postid]`;
   return db.any(sql, {postid});
 }
 

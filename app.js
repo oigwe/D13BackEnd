@@ -15,7 +15,6 @@ const userPreferenceTopicsRouter = require('./routes/userPreferenceTopics');
 const userPreferenceTVRouter = require('./routes/userPreferenceTV');
 const usersRouter = require('./routes/users');
 
-app.use(cors());
 
 
 // MIDDLEWARE NEEDED
@@ -51,6 +50,8 @@ const validUser = (req, res, next) => {
     res.json({error: 'You are not the valid user'})
   }
 }
+
+app.use(cors());
 
 
 // routes
