@@ -16,7 +16,7 @@ d13Router.post('/', (req, res, next) => {
 });
 
 // GET - READ 
-d13Router.get('/', (req, res, next) => {
+/*d13Router.get('/', (req, res, next) => {
   const {id} = req.query;
 
   PostsService.read(id)
@@ -28,7 +28,7 @@ d13Router.get('/', (req, res, next) => {
     .catch(err => {
       next(err);
     })
-});
+});*/
 
 d13Router.get('/:userid/all', (req, res, next) => {
     const {userid} = req.params;
@@ -43,6 +43,8 @@ d13Router.get('/:userid/all', (req, res, next) => {
         next(err);
       })
   });
+
+
 
 // PUT - UPDATE
 d13Router.put('/:id', (req, res, next) => {

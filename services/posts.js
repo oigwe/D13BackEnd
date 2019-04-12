@@ -14,7 +14,7 @@ Posts.read = (id) => {
 }
 
 Posts.readAll = (userid) => {
-  const sql = `SELECT * FROM posts JOIN users ON posts.userid = $[userid] `;
+  const sql = `SELECT posts.id, posts.caption, posts.imageurl, users.nameofuser, users.username FROM posts JOIN users ON posts.userid = users.id WHERE users.id = $[userid]`;
   return db.any(sql, {userid});
 }
 
