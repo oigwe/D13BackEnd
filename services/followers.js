@@ -9,10 +9,14 @@ Followers.create = (follower, followed) => {
 }
 
 Followers.read = (userid) => {
-  const sql = `SELECT * FROM followers WHERE follower=$[userid]`;
+  const sql = `SELECT followers.*, users.* FROM followers JOIN users ON followers.followed = users.id WHERE followers.follower=$[userid]`;
   return db.any(sql, {userid})
 }
 
+Followers.readFollowed = (userid) => {
+  const sql = `SELECT followers.*, users.* FROM followers JOIN users ON followers.follower = users.id WHERE followers.followed=$[userid]`;
+  return db.any(sql, {userid})
+}
 /*Followers.getFollowing = (follower) => {
   const sql = `SELECT * FROM followers WHERE followed=${followed}`;
   return db.any(sql, {followed});

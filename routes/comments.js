@@ -3,14 +3,14 @@ const d13Router = express.Router();
 const CommentService = require('../services/comments');
 
 // POST - CREATE 
-d13Router.post('/', (req, res, next) => {
+d13Router.post('/:postid', (req, res, next) => {
   const {userid, commenttext} = req.body;
   const {postid} = req.params;
 
 
   CommentService.create(postid, userid, commenttext)
     .then(data => {
-      res.json({success: `Created comment for user ${userid} with generated ID: ${data.id}`});
+      res.json({success: `Created comment for user ${userid} with generated ID: ${data.cid}`});
     })
     .catch(err => {
       next(err);

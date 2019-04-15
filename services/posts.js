@@ -4,7 +4,7 @@ const Posts = {};
 Posts.create = (userid, imageurl, caption) => {
   const sql = `
   INSERT INTO posts (userid, imageurl, caption) VALUES 
-  ($[userid], $[imageurl], $[caption]) RETURNING id`;
+  ($[userid], $[imageurl], $[caption]) RETURNING pid`;
   return db.one(sql, {userid, imageurl, caption});
 }
 

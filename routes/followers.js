@@ -16,10 +16,24 @@ d13Router.post('/', (req, res, next) => {
 });
 
 // GET - READ 
-d13Router.get('/:userid', (req, res, next) => {
+d13Router.get('/:userid/followed', (req, res, next) => {
   const {userid} = req.params;
 
   FollowersService.read(userid)
+    .then(data => {
+      res.json({
+        'data': data
+      });
+    })
+    .catch(err => {
+      next(err);
+    })
+});
+
+d13Router.get('/:userid/following', (req, res, next) => {
+  const {userid} = req.params;
+
+  FollowersService.readFollowed(userid)
     .then(data => {
       res.json({
         'data': data

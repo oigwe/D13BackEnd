@@ -33,6 +33,34 @@ d13Router.get('/', (req, res, next) => {
     })
 });
 
+d13Router.get('/:nameofuser', (req, res, next) => {
+  const {nameofuser} = req.params;
+
+  UpService.readName(nameofuser)
+    .then(data => {
+      res.json({
+        'data': data
+      });
+    })
+    .catch(err => {
+      next(err);
+    })
+});
+
+d13Router.get('/profile/:username', (req, res, next) => {
+  const {username} = req.params;
+
+  UpService.readUsername(username)
+    .then(data => {
+      res.json({
+        'data': data
+      });
+    })
+    .catch(err => {
+      next(err);
+    })
+});
+
 
 // PUT - UPDATE
 d13Router.put('/:id', (req, res, next) => {

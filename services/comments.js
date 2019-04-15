@@ -4,7 +4,7 @@ const Comments = {};
 Comments.create = (postid, userid, commenttext) => {
   const sql = `
   INSERT INTO comments (postid, userid, commenttext) VALUES 
-  ($[postid], $[userid], $[commenttext]) RETURNING id`;
+  ($[postid], $[userid], $[commenttext]) RETURNING cid`;
   return db.one(sql, {postid, userid, commenttext});
 }
 
