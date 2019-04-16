@@ -3,12 +3,14 @@ const d13Router = express.Router();
 const FollowersService = require('../services/followers');
 
 // POST - CREATE 
-d13Router.post('/', (req, res, next) => {
+d13Router.post('/follow', (req, res, next) => {
   const {follower, followed} = req.body;
 
   FollowersService.create(follower, followed)
     .then(data => {
-      res.json({success: `User ${follower} has followed user ${followed}`});
+      res.json({
+        "data": data
+      });
     })
     .catch(err => {
       next(err);

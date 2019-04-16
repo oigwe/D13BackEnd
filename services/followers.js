@@ -3,7 +3,7 @@ const Followers = {};
 
 Followers.create = (follower, followed) => {
   const sql = `
-  INSERT INTO followers (follower, followed)) VALUES 
+  INSERT INTO followers (follower, followed) VALUES 
   ($[follower], $[followed]) RETURNING id`;
   return db.one(sql, {follower, followed});
 }
